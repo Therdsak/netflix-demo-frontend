@@ -110,29 +110,13 @@ npm run lint
 
 ## ✨ Features
 
-- **Authentication Flow (รองรับการเข้าสู่ระบบ/ออกจากระบบ)**  
-  ใช้ร่วมกับ Next.js Middleware และ State Management (Zustand)
+- **Loading API Movie Fetch List**  
+  เรียก API GateWay ที่สร้างขึ้น เพื่อนำมาเเสดงข้อมูลเป็น list ทั้งหมด
 
 - **Internationalization (i18n)**  
   ใช้ `next-i18next`, `i18next`, `react-i18next` รองรับหลายภาษา
 
-- **Responsive UI & Styling**  
-  ใช้ `Tailwind CSS v4` และ `Framer Motion` เพื่อทำ UI ที่สวยงามและมี Animation
+- **Zustand (State management Theme)**  
+  ใช้ Zustand เป็น ตัวเปลี่ยนเเละเก็บ Theme ว่าจะเป็น dark / light
 
-- **State Management แบบเบา**  
-  ใช้ [Zustand](https://zustand-demo.pmnd.rs/) จัดการ Global State แบบ minimal
 
-- **Data Fetching & Caching**  
-  ใช้ `TanStack React Query` สำหรับการจัดการ API calls และ caching
-
-- **Modular Architecture**  
-  แบ่งโครงสร้างออกเป็น Layer ชัดเจน  
-  - `data` (repositories, datasources, adapters)  
-  - `domain` (models, usecases)  
-  - `presentation` (components, context, store, hooks, providers)
-
-- **Error Handling & Loading State**  
-  Integrate ผ่าน React Query + Zustand เพื่อจัดการ UX เวลาโหลด/เกิด error
-
-- **Scalable Project Structure**  
-  ออกแบบรองรับการขยาย feature ใหม่ ๆ ได้ง่าย เช่นเพิ่ม usecase, component, หรือภาษาที่รองรับ
