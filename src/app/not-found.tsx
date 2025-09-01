@@ -1,5 +1,7 @@
 import BadRequestPage from "@/presentation/components/BadRequestPage";
 
-export default function Home() {
+const Custom404 = () => {
   return <BadRequestPage />;
-}
+};
+
+export default Custom404;

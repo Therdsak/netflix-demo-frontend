@@ -1,36 +1,107 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nexflix Demo Frontend 🎬
 
-## Getting Started
+โปรเจกต์นี้เป็น **Frontend Web App** ที่สร้างด้วย [Next.js](https://nextjs.org/) (เวอร์ชัน 15.x) โดยโครงสร้างและ dependencies ถูกออกแบบมาเพื่อรองรับ **State Management, i18n, UI Styling, Data Fetching** และการพัฒนาแบบโมดูลาร์
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 📂 โครงสร้างโปรเจกต์
+
+```
+nexflix-demo-frontend/
+│
+├── public/                # Static files (favicon, images, etc.)
+│
+├── src/
+│   ├── app/               # Next.js App Router (layout.tsx, page.tsx, not-found.tsx)
+│   ├── data/              # Data access layer
+│   │   ├── adapters/      # Adapter แปลงข้อมูล
+│   │   ├── datasources/   # แหล่งข้อมูล เช่น API / local storage
+│   │   └── repositories/  # Repository pattern เชื่อม usecases กับ datasource
+│   ├── domain/            # Business logic (models, usecases)
+│   ├── presentation/      # Layer ที่เกี่ยวกับ UI
+│   │   ├── components/    # UI Components
+│   │   ├── context/       # React Context Providers
+│   │   ├── hooks/         # Custom hooks
+│   │   ├── providers/     # Provider wrappers
+│   │   └── store/         # Zustand store สำหรับ state management
+│   ├── i18n/              # Internationalization config (next-i18next, locales)
+│   ├── utils/             # ฟังก์ชัน helper ต่าง ๆ
+│   └── middleware.ts      # Next.js Middleware
+│
+├── .env                   # Environment variables
+├── next.config.ts         # Next.js configuration
+├── tailwind.config.ts     # Tailwind CSS configuration
+├── tsconfig.json          # TypeScript configuration
+├── package.json           # Scripts และ Dependencies
+└── README.md              # เอกสารโปรเจกต์
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠 เทคโนโลยีที่ใช้
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Framework**
+  - [Next.js 15](https://nextjs.org/) – React Framework (App Router, Server/Client Components)
+  - [React 19](https://react.dev/) – UI Library
 
-## Learn More
+- **UI & Styling**
+  - [Tailwind CSS v4](https://tailwindcss.com/) – Utility-first CSS framework
+  - [Framer Motion](https://www.framer.com/motion/) – Animation library
+  - [Geist](https://vercel.com/font) – Font จาก Vercel
 
-To learn more about Next.js, take a look at the following resources:
+- **State Management**
+  - [Zustand](https://zustand-demo.pmnd.rs/) – Lightweight state management
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Data Fetching**
+  - [TanStack React Query](https://tanstack.com/query/latest) – Server state management + caching
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Internationalization (i18n)**
+  - [i18next](https://www.i18next.com/) + [next-i18next](https://github.com/i18next/next-i18next) – รองรับหลายภาษา
+  - [react-i18next](https://react.i18next.com/) – integration กับ React
 
-## Deploy on Vercel
+- **Linting & Type Checking**
+  - [ESLint](https://eslint.org/) – Linting
+  - [TypeScript](https://www.typescriptlang.org/) – Type safety
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🚀 วิธีการรัน
+
+### 1. ติดตั้ง dependencies
+```bash
+npm install
+# หรือ
+yarn install
+# หรือ
+pnpm install
+```
+
+### 2. รัน development server
+```bash
+npm run dev
+```
+แล้วเปิด [http://localhost:3000](http://localhost:3000) ใน browser
+
+### 3. Build โปรเจกต์สำหรับ production
+```bash
+npm run build
+```
+
+### 4. รัน production server
+```bash
+npm run start
+```
+
+### 5. ตรวจสอบ lint
+```bash
+npm run lint
+```
+
+---
+
+## 📦 Scripts ที่ใช้บ่อย (จาก `package.json`)
+
+- `dev` → `next dev --turbopack`
+- `build` → `next build --turbopack`
+- `start` → `next start`
+- `lint` → `eslint`

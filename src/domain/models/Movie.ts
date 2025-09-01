@@ -1,0 +1,12 @@
+export interface Movie {
+  id: number;
+  title: string;
+  overview: string;
+  poster_path: string;
+  backdrop_path: string;
+  release_date: string;
+  release_year: string;
+  popularity: number;
+  vote_average: number;
+  adult: boolean;
+}
