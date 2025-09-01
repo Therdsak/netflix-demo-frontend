@@ -1,0 +1,56 @@
+name: Build, Test Run & Push Docker Image
+
+on:
+  push:
+    branches: ["main"]
+
+env:
+  IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/nextjs-app
+
+jobs:
+  build-test-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+
+      - name: Build Docker image (local only)
+        run: |
+          docker build -t $IMAGE_NAME:test .
+
+      - name: Test run container
+        run: |
+          # รัน container ขึ้นมาแบบเบื้องหลัง
+          docker run -d --rm -p 3000:3000 --name test_container $IMAGE_NAME:test
+          # รอให้ container start
+          sleep 10
+          # ตรวจสอบว่า container ยังรันอยู่
+          docker ps | grep test_container
+          # เช็ค health (ลอง curl endpoint root)
+          curl -f http://localhost:3000 || (echo "App failed to start!" && exit 1)
+          # หยุดและลบ container
+          docker stop test_container
+
+      - name: Build and push final Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.IMAGE_NAME }}:latest
+            ${{ env.IMAGE_NAME }}:${{ github.sha }}
+          cache-from: type=registry,ref=${{ env.IMAGE_NAME }}:cache
+          cache-to: type=registry,ref=${{ env.IMAGE_NAME }}:cache,mode=max
