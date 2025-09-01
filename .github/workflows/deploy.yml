@@ -5,7 +5,7 @@ on:
     branches: ["main"]
 
 env:
-  IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/nextjs-app
+  IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/netflix-demo-frontend
 
 jobs:
   build-and-push:
